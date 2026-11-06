@@ -88,6 +88,7 @@
     const bad = validate();
     if (bad) { bad.focus(); return; }
     const btn = form.querySelector('[type="submit"]');
+    if (btn.getAttribute("aria-busy") === "true") return; // заявка уже отправляется: без этого повторный Enter создаёт дубль
     btn.setAttribute("aria-busy", "true");
     status.textContent = "Отправляем...";
     const data = Object.fromEntries(new FormData(form).entries());
